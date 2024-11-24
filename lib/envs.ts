@@ -1,5 +1,7 @@
-export const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
-export const INTERNAL_API_URL = process.env.NEXT_PUBLIC_INTERNAL_API_URL;
+export const STRAPI_URL =
+	process.env.NEXT_PUBLIC_STRAPI_URL ?? "https://strapi-8l20.onrender.com";
+export const INTERNAL_API_URL =
+	process.env.NEXT_PUBLIC_INTERNAL_API_URL ?? "https://impregraf.vercel.app";
 export const STRAPI_API_TOKEN = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
 export const MP_ACCESS_TOKEN =
 	process.env.NEXT_PUBLIC_MP_ACCESSTOKEN ??
