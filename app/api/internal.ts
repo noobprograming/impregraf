@@ -1,5 +1,6 @@
 import { INTERNAL_API_URL } from "@/lib/envs";
 import type { ProductPage } from "../types/product";
+import { Home } from "../types/home";
 
 class InternalFetch {
 	private url = INTERNAL_API_URL;
@@ -50,8 +51,8 @@ class InternalFetch {
 }
 
 export class InternalService extends InternalFetch {
-	async getHome() {
-		return await this.Get("/home");
+	async getHome(): Promise<Home> {
+		return (await this.Get("/home")) ?? ({} as Home);
 	}
 
 	async getMenu() {
