@@ -76,3 +76,18 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+:root {
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.hero-title {
+    font-family: sans-serif;
+    text-align: center;
+    letter-spacing: -1px;
+    line-height: 1.2;
+    text-align: center;
+    color: black;
+}
