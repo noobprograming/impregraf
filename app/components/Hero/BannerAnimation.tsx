@@ -1,5 +1,6 @@
 "use client";
 
+import { STRAPI_URL } from "@/lib/envs";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import React from "react";
@@ -11,7 +12,7 @@ export default function BannerAnimation() {
 
 	const animatedImages = [
 		{
-			url: "http://localhost:1337/uploads/pngwing_com_6f97c948b3.png",
+			url: `${STRAPI_URL}/uploads/pngwing_com_6f97c948b3.png`,
 			initial: {
 				x: "-300%",
 				rotate: 0,
@@ -31,7 +32,7 @@ export default function BannerAnimation() {
 			},
 		},
 		{
-			url: "http://localhost:1337/uploads/taylor_swift_1752710_151c61ff9d.jpg",
+			url: `${STRAPI_URL}/uploads/taylor_swift_1752710_151c61ff9d.jpg`,
 			initial: {
 				x: "-300%",
 				zoom: 0,
@@ -85,7 +86,7 @@ export default function BannerAnimation() {
 			/>
 			<motion.div ref={limitImage} className="justify-items-end">
 				<Image
-					src="http://localhost:1337/uploads/remera_adulto_unisex_blanca_sublimable_adb999db75.jpg"
+					src={`${STRAPI_URL}/uploads/remera_adulto_unisex_blanca_sublimable_adb999db75.jpg`}
 					alt="pikachu"
 					width={300}
 					height={300}

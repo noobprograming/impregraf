@@ -14,6 +14,7 @@ import { IconType } from "@/app/types/commons";
 import Image from "next/image";
 import Icon from "@/components/ui/icon";
 import Cart from "./Header/Cart";
+import { STRAPI_URL } from "@/lib/envs";
 
 interface Menu {
 	categories: Category[];
@@ -26,7 +27,7 @@ export async function Header() {
 		<header>
 			<div className="py-4 flex justify-between items-center ">
 				<Image
-					src="http://localhost:1337/uploads/Whats_App_Image_2024_10_28_at_15_06_47_d5b9ae8746.jpeg"
+					src={`${STRAPI_URL}/uploads/Whats_App_Image_2024_10_28_at_15_06_47_d5b9ae8746.jpeg`}
 					className="md:h-28 w-32 md:w-44"
 					alt="logo"
 					height={300}
