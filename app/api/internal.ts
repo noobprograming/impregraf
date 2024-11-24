@@ -6,15 +6,23 @@ class InternalFetch {
 
 	async Get(url: string) {
 		const response = await fetch(this.url + url);
-		return await response.json();
+		try {
+			return await response.json();
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
 	async Post(url: string, body: any) {
-		const response = await fetch(this.url + url, {
-			method: "POST",
-			body: JSON.stringify(body),
-		});
-		return await response.json();
+		try {
+			const response = await fetch(this.url + url, {
+				method: "POST",
+				body: JSON.stringify(body),
+			});
+			return await response.json();
+		} catch (error) {
+			console.error(error);
+		}
 	}
 }
 
@@ -32,7 +40,7 @@ export class InternalService extends InternalFetch {
 		return productPage;
 	}
 
-async createMpPreference(body: any) {
+	async createMpPreference(body: any) {
 		return await this.Post("/mercadopago", body);
 	}
 }

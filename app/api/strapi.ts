@@ -39,8 +39,12 @@ class StrapiFetch {
 				Authorization: `Bearer ${this.apiToken}`,
 			},
 		});
-		const { data } = await response.json();
-		return data;
+		try {
+			const { data } = await response.json();
+			return data;
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
 	async Put(url: string, body: unknown) {
@@ -53,8 +57,12 @@ class StrapiFetch {
 				Authorization: `Bearer ${this.apiToken}`,
 			},
 		});
-		const { data } = await response.json();
-		return data;
+		try {
+			const { data } = await response.json();
+			return data;
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
 	async Post(url: string, body: unknown) {
@@ -67,8 +75,12 @@ class StrapiFetch {
 				Authorization: `Bearer ${this.apiToken}`,
 			},
 		});
-		const { data } = await response.json();
-		return data;
+		try {
+			const { data } = await response.json();
+			return data;
+		} catch (error) {
+			console.error(error);
+		}
 	}
 
 	async Delete(url: string) {
