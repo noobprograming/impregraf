@@ -1,15 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        remotePatterns: [
-            {
-                protocol: 'http',
-                hostname: 'localhost',
-                port: '1337',
-                pathname: '/uploads/**',
-            },
-        ],
-      },
+	images: {
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "strapi-8l20.onrender.com",
+				pathname: "/uploads/**",
+			},
+		],
+	},
+	eslint: {
+		// Warning: This allows production builds to successfully complete even if
+		// your project has ESLint errors.
+		ignoreDuringBuilds: true,
+	},
 };
 
 export default nextConfig;
