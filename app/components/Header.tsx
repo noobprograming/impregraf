@@ -27,7 +27,7 @@ export async function Header() {
 		<header>
 			<div className="py-4 flex justify-between items-center ">
 				<Image
-					src={`${STRAPI_URL}/uploads/Whats_App_Image_2024_10_28_at_15_06_47_d5b9ae8746.jpeg`}
+					src={`${STRAPI_URL}/uploads/logo_27ce4b8e0c.jpeg`}
 					className="md:h-28 w-32 md:w-44"
 					alt="logo"
 					height={300}
