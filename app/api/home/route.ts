@@ -6,8 +6,11 @@ import { STRAPI_URL } from "@/lib/envs";
 export async function GET() {
 	const strapiService = new StrapiDataService();
 	const categories = (await strapiService.getCategories()) || [];
+	console.log("🚀 ~ GET ~ categories:", categories);
 	const products = (await strapiService.getProducts()) || [];
+	console.log("🚀 ~ GET ~ products:", products);
 	const subcategories = (await strapiService.getSubcategories()) || [];
+	console.log("🚀 ~ GET ~ subcategories:", subcategories);
 	const categoriesUpdated: Category[] = [];
 
 	for (const category of categories) {
@@ -21,6 +24,7 @@ export async function GET() {
 
 		categoriesUpdated.push(category);
 	}
+	console.log("🚀 ~ GET ~ categoriesUpdated:", categoriesUpdated);
 
 	return NextResponse.json({
 		hero: {
