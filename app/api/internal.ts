@@ -8,10 +8,11 @@ class InternalFetch {
 
 	async Get(url: string) {
 		console.log("🚀 ~ InternalFetch ~ Get ~ this.url + url:", this.url + url);
+		try {
 			const response = await fetch(this.url + url);
 			return await response.json();
 		} catch (error) {
-			console.log("🚀 ~ InternalFetch ~ Get ~ error:", error)
+			console.log("🚀 ~ InternalFetch ~ Get ~ error:", error);
 			return {};
 		}
 	}
@@ -27,6 +28,7 @@ class InternalFetch {
 			});
 			return await response.json();
 		} catch (error) {
+			console.log("🚀 ~ InternalFetch ~ Post ~ error:", error);
 			return {};
 		}
 	}
