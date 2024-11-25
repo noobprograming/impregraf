@@ -43,7 +43,7 @@ class StrapiFetch {
 			const { data } = await response.json();
 			return data;
 		} catch (error) {
-			console.error(error);
+			return {};
 		}
 	}
 
@@ -61,7 +61,7 @@ class StrapiFetch {
 			const { data } = await response.json();
 			return data;
 		} catch (error) {
-			console.error(error);
+			return {};
 		}
 	}
 
@@ -80,6 +80,7 @@ class StrapiFetch {
 			return data;
 		} catch (error) {
 			console.error(error);
+			return {};
 		}
 	}
 

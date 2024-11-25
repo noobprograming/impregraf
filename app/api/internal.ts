@@ -8,19 +8,9 @@ class InternalFetch {
 	async Get(url: string) {
 		try {
 			const response = await fetch(this.url + url);
-			if (!response.ok) {
-				const text = await response.text();
-				console.error("Response text:", text);
-				throw new Error(`HTTP error! status: ${response.status}`);
-			}
-			const contentType = response.headers.get("content-type");
-			if (!contentType || !contentType.includes("application/json")) {
-				throw new TypeError("Response is not JSON");
-			}
 			return await response.json();
 		} catch (error) {
-			console.error(`Error fetching ${url}:`, error);
-			return null;
+			return {};
 		}
 	}
 
@@ -33,19 +23,9 @@ class InternalFetch {
 				},
 				body: JSON.stringify(body),
 			});
-			if (!response.ok) {
-				const text = await response.text();
-				console.error("Response text:", text);
-				throw new Error(`HTTP error! status: ${response.status}`);
-			}
-			const contentType = response.headers.get("content-type");
-			if (!contentType || !contentType.includes("application/json")) {
-				throw new TypeError("Response is not JSON");
-			}
 			return await response.json();
 		} catch (error) {
-			console.error(`Error posting to ${url}:`, error);
-			return null;
+			return {};
 		}
 	}
 }
@@ -68,3 +48,4 @@ export class InternalService extends InternalFetch {
 		return await this.Post("/mercadopago", body);
 	}
 }
+
