@@ -7,13 +7,9 @@ class InternalFetch {
 	private url = INTERNAL_API_URL;
 
 	async Get(url: string) {
-		console.log("🚀 ~ InternalFetch ~ Get ~ this.url + url:", this.url + url);
-		try {
-			const response = await fetch(this.url + url);
-			return await response.json();
-		} catch (error) {
-			return {};
-		}
+		const response = await fetch(this.url + url);
+		console.log("🚀 ~ InternalFetch ~ Get ~ response:", response);
+		return await response.json();
 	}
 
 	async Post(url: string, body: any) {
