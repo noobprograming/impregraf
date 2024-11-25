@@ -7,12 +7,12 @@ export default function Categories({
 }: { categories: CategoriesType }) {
 	return (
 		<div className="grid gap-8">
-			{categories.items.map((category) => (
+			{categories.items?.map((category) => (
 				<div key={category.id} className="grid">
-					{category.subcategories.length > 0
-						? category.subcategories.map(
+					{category.subcategories?.length > 0
+						? category.subcategories?.map(
 								(subcategory) =>
-									subcategory.products.length > 0 && (
+									subcategory.products?.length > 0 && (
 										<div key={subcategory.id} className="grid gap-2">
 											<strong className="text-2xl font-bold">
 												{category.name}
@@ -24,7 +24,7 @@ export default function Categories({
 										</div>
 									),
 							)
-						: category.products.length > 0 && (
+						: category.products?.length > 0 && (
 								<section className="grid gap-2">
 									<strong className="text-2xl font-bold">
 										{category.name}

@@ -40,10 +40,10 @@ export default function Cart() {
 		<Popover>
 			<PopoverTrigger className="flex gap-1 cursor-pointer shadow-md p-3 rounded-full items-center">
 				<Icon icon={IconType.ShoppingCart} size={24} />
-				<p className="text-xs font-semibold">{cart.cart_products?.length}</p>
+				<p className="text-xs font-semibold">{cart?.cart_products?.length}</p>
 			</PopoverTrigger>
 			<PopoverContent className="relative w-auto content-start h-fit mr-4 grid gap-4 overflow-auto max-h-96 p-4">
-				{cart.cart_products?.length ? (
+				{cart?.cart_products?.length ? (
 					cart.cart_products.map((cartProduct, index) => (
 						<React.Fragment key={cartProduct.documentId}>
 							<CartProductCard cartProduct={cartProduct} index={index} />

@@ -107,11 +107,11 @@ export default function Producto({ params }: { params: { slug: string } }) {
 								<h3 className="text-lg font-regular">
 									{productPage.product.description}
 								</h3>
-								{productPage.product.sizes.length > 0 && (
+								{productPage.product?.sizes?.length > 0 && (
 									<div className="grid gap-2">
 										<p className="text-lg">Talles:</p>
 										<div className="flex gap-2">
-											{productPage.product.sizes.map((size) => (
+											{productPage.product?.sizes.map((size) => (
 												<Badge
 													key={size.key}
 													variant={
@@ -129,11 +129,11 @@ export default function Producto({ params }: { params: { slug: string } }) {
 									</div>
 								)}
 
-								{productPage.product.colors.length > 0 && (
+								{productPage.product?.colors?.length > 0 && (
 									<div className="grid gap-2">
 										<p className="text-lg">Colores:</p>
 										<div className="flex gap-2">
-											{productPage.product.colors.map((color) => (
+											{productPage.product?.colors?.map((color) => (
 												<div
 													key={color.key}
 													className="rounded-md p-2"
@@ -162,7 +162,7 @@ export default function Producto({ params }: { params: { slug: string } }) {
 									</div>
 								)}
 
-								{productPage.product.material.id && (
+								{productPage.product?.material?.id && (
 									<div className="grid gap-2">
 										<p className="text-lg">Material:</p>
 										<Badge
