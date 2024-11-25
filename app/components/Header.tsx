@@ -9,16 +9,12 @@ import {
 	NavigationMenuTrigger,
 } from "@/components/ui/navigationMenu";
 import { InternalService } from "@/app/api/internal";
-import type { Category } from "@/app/types/commons";
+import type { Category, Menu } from "@/app/types/commons";
 import { IconType } from "@/app/types/commons";
 import Image from "next/image";
 import Icon from "@/components/ui/icon";
 import Cart from "./Header/Cart";
 import { STRAPI_URL } from "@/lib/envs";
-
-interface Menu {
-	categories: Category[];
-}
 
 export async function Header() {
 	const menu: Menu = await new InternalService().getMenu();

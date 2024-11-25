@@ -19,7 +19,7 @@ import { MercadoPagoConfig } from "mercadopago";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { InternalService } from "@/app/api/internal";
-import { Cart } from "@/app/types/cart";
+import type { Cart } from "@/app/types/cart";
 import { MP_PUBLIC_KEY } from "@/lib/envs";
 
 export default function Checkout({ params }: { params: { cart: string } }) {

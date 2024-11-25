@@ -5,6 +5,7 @@ import { InternalService } from "@/app/api/internal";
 
 export default async function Home() {
 	const home = await new InternalService().getHome();
+	console.log("🚀 ~ Home ~ home:", home);
 
 	return (
 		<div className="py-8 grid gap-14">

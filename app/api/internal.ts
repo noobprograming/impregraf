@@ -1,6 +1,7 @@
 import { INTERNAL_API_URL } from "@/lib/envs";
 import type { ProductPage } from "../types/product";
-import { Home } from "../types/home";
+import type { Home } from "../types/home";
+import type { Menu } from "../types/commons";
 
 class InternalFetch {
 	private url = INTERNAL_API_URL;
@@ -32,11 +33,23 @@ class InternalFetch {
 
 export class InternalService extends InternalFetch {
 	async getHome(): Promise<Home> {
-		return (await this.Get("/home")) ?? ({} as Home);
+		try {
+			const home = await this.Get("/home");
+			return home;
+		} catch (error) {
+			console.log("🚀 ~ InternalService ~ getHome ~ error:", error);
+			return {} as Home;
+		}
 	}
 
 	async getMenu() {
-		return await this.Get("/menu");
+		try {
+			const menu = await this.Get("/menu");
+			return menu;
+		} catch (error) {
+			console.log("🚀 ~ InternalService ~ getMenu ~ error:", error);
+			return {} as Menu;
+		}
 	}
 
 	async getProductPage(slug: string): Promise<ProductPage> {
@@ -48,4 +61,3 @@ export class InternalService extends InternalFetch {
 		return await this.Post("/mercadopago", body);
 	}
 }
-

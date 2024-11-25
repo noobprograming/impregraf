@@ -1,3 +1,7 @@
+export interface Menu {
+	categories: Category[];
+}
+
 export interface Category {
 	id: string;
 	name: string;

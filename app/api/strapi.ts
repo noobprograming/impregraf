@@ -102,9 +102,15 @@ export class StrapiDataService extends StrapiFetch {
 	}
 
 	async getCategories(): Promise<Category[]> {
-		return await this.Get(
-			"/categories?populate[subcategories][populate][0]=products&populate[products][populate][0]=photos",
-		);
+		try {
+			const categories = await this.Get(
+				"/categories?populate[subcategories][populate][0]=products&populate[products][populate][0]=photos",
+			);
+			return categories;
+		} catch (error) {
+			console.log("🚀 ~ StrapiDataService ~ getCategories ~ error:", error);
+			return [];
+		}
 	}
 
 	async getSubcategories(): Promise<Subcategory[]> {
