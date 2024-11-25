@@ -5,6 +5,7 @@ import { STRAPI_URL } from "@/lib/envs";
 
 export async function GET() {
 	const strapiService = new StrapiDataService();
+	console.log("🚀 ~ GET ~ strapiService:", strapiService);
 	const categories = (await strapiService.getCategories()) || [];
 	console.log("🚀 ~ GET ~ categories:", categories);
 	const products = (await strapiService.getProducts()) || [];

@@ -7,6 +7,7 @@ class InternalFetch {
 	private url = INTERNAL_API_URL;
 
 	async Get(url: string) {
+		console.log("🚀 ~ InternalFetch ~ Get ~ this.url + url:", this.url + url);
 		try {
 			const response = await fetch(this.url + url);
 			return await response.json();
