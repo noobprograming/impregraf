@@ -36,6 +36,7 @@ export class InternalService extends InternalFetch {
 	async getHome(): Promise<Home> {
 		try {
 			const home = await this.Get("/home");
+			console.log("🚀 ~ InternalService ~ getHome ~ home:", home);
 			return home;
 		} catch (error) {
 			console.log("🚀 ~ InternalService ~ getHome ~ error:", error);

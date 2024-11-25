@@ -64,6 +64,6 @@ export async function GET() {
 			title: "Nuestras categorías",
 		},
 	};
-	console.log("🚀 ~ GET ~ home:", home);
+
 	return NextResponse.json(home);
 }
