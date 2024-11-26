@@ -6,9 +6,7 @@ import { NextResponse } from "next/server";
 // Agrega credenciales
 export async function POST(request: Request) {
 	const cart: Cart = await request.json();
-	console.log("🚀 ~ POST ~ body:", cart);
 	const client = new MercadoPagoConfig({ accessToken: MP_ACCESS_TOKEN });
-
 	const preference = new Preference(client);
 
 	const preferenceResponse = await preference.create({
@@ -25,7 +23,6 @@ export async function POST(request: Request) {
 				failure: `${BASE_URL}/checkout/${cart.documentId}/failure`,
 				pending: `${BASE_URL}/checkout/${cart.documentId}/pending`,
 			},
-			auto_return: "approved",
 		},
 	});
 
