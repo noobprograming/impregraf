@@ -1,6 +1,6 @@
 // SDK de Mercado Pago
 import type { Cart } from "@/app/types/cart";
-import { MP_ACCESS_TOKEN } from "@/lib/envs";
+import { BASE_URL, MP_ACCESS_TOKEN } from "@/lib/envs";
 import { MercadoPagoConfig, Preference } from "mercadopago";
 import { NextResponse } from "next/server";
 // Agrega credenciales
@@ -20,11 +20,10 @@ export async function POST(request: Request) {
 				quantity: product.quantity,
 				unit_price: product.product.price,
 			})),
-			purpose: "testing_integration",
 			back_urls: {
-				success: "https://www.tu-sitio/success",
-				failure: "http://www.tu-sitio/failure",
-				pending: "http://www.tu-sitio/pending",
+				success: `${BASE_URL}/success`,
+				failure: `${BASE_URL}/failure`,
+				pending: `${BASE_URL}/pending`,
 			},
 			auto_return: "approved",
 		},

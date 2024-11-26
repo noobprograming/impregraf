@@ -9,3 +9,5 @@ export const MP_ACCESS_TOKEN =
 export const MP_PUBLIC_KEY =
 	process.env.NEXT_PUBLIC_MP_PUBLIC_KEY ??
 	"APP_USR-f985ad97-13a0-47b3-ab7d-f720ea428008";
+export const BASE_URL =
+	process.env.NEXT_PUBLIC_BASE_URL ?? "https://impregraf.vercel.app";
