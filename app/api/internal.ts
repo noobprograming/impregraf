@@ -2,7 +2,7 @@ import { INTERNAL_API_URL } from "@/lib/envs";
 import type { ProductPage } from "../types/product";
 import type { Home } from "../types/home";
 import type { Menu } from "../types/commons";
-import { Cart } from "../types/cart";
+import type { Cart } from "../types/cart";
 
 class InternalFetch {
 	private url = INTERNAL_API_URL;

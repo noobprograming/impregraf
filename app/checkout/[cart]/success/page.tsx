@@ -5,7 +5,7 @@ import { useStore } from "@/lib/store";
 import Link from "next/link";
 import React from "react";
 
-const WHATSAPP_NUMBER = "+598921351";
+const WHATSAPP_NUMBER = "+598098921351";
 
 export default function Success({ params }: { params: { cart: string } }) {
 	const { refreshCart } = useStore();
