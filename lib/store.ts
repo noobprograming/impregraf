@@ -5,18 +5,19 @@ import { StrapiDataService } from "@/app/api/strapi";
 interface Store {
 	cart: Cart;
 	updateCart: (cart: Cart) => void;
-	refreshCart: (cart: string) => void;
+	refreshCart: (cart: string) => Promise<Cart>;
 }
 
 export const useStore = create<Store>((set) => ({
 	cart: {} as Cart,
 	updateCart: (cart: Cart) => set({ cart }),
-	refreshCart: (cart: string) => refreshCart(cart),
+	refreshCart: (cart: string): Promise<Cart> => refreshCart(cart),
 }));
 
-const refreshCart = async (cart: string) => {
+const refreshCart = async (cart: string): Promise<Cart> => {
 	const storedCart = cart ?? "";
 	const strapiService = new StrapiDataService();
 	const _cart = await strapiService.getCart(storedCart);
 	useStore.getState().updateCart(_cart);
+	return _cart;
 };
