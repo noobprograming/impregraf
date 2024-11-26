@@ -21,9 +21,9 @@ export async function POST(request: Request) {
 				unit_price: product.product.price,
 			})),
 			back_urls: {
-				success: `${BASE_URL}/success`,
-				failure: `${BASE_URL}/failure`,
-				pending: `${BASE_URL}/pending`,
+				success: `${BASE_URL}/checkout/${cart.documentId}/success`,
+				failure: `${BASE_URL}/checkout/${cart.documentId}/failure`,
+				pending: `${BASE_URL}/checkout/${cart.documentId}/pending`,
 			},
 			auto_return: "approved",
 		},

@@ -2,6 +2,7 @@ import { INTERNAL_API_URL } from "@/lib/envs";
 import type { ProductPage } from "../types/product";
 import type { Home } from "../types/home";
 import type { Menu } from "../types/commons";
+import { Cart } from "../types/cart";
 
 class InternalFetch {
 	private url = INTERNAL_API_URL;
@@ -61,7 +62,7 @@ export class InternalService extends InternalFetch {
 		return productPage;
 	}
 
-	async createMpPreference(body: any) {
+	async createMpPreference(body: Cart) {
 		return await this.Post("/mercadopago", body);
 	}
 }
