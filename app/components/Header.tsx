@@ -29,50 +29,7 @@ export async function Header() {
 					height={300}
 					width={500}
 				/>
-				<Icon icon={IconType.List} className="md:hidden" />
-				<div className="hidden md:flex gap-6">
-					<NavigationMenu className="gap-6 items-end">
-						{menu.categories?.map((category) => (
-							<NavigationMenuList key={category.id}>
-								<NavigationMenuItem>
-									<NavigationMenuTrigger className="px-4">
-										{category.name}
-									</NavigationMenuTrigger>
-									<NavigationMenuContent className="w-max p-4">
-										{category.subcategories?.length > 0 &&
-											category.subcategories?.map((category) => (
-												<ListItem
-													className="w-screen font-bold text-gray-400"
-													key={category.name}
-													href="/docs"
-													title={category.name}
-												>
-													{category.products?.map((product) => (
-														<ListItem
-															className="text-black hover:bg-blue-600 hover:text-white hover:font-bold mt-2"
-															key={product.title}
-															href="/docs"
-															title={product.title}
-														/>
-													))}
-												</ListItem>
-											))}
-										{category.subcategories?.length === 0 &&
-											category.products?.map((product) => (
-												<ListItem
-													className="text-black hover:bg-blue-600 hover:text-white hover:font-bold w-screen"
-													key={product.title}
-													href="/docs"
-													title={product.title}
-												/>
-											))}
-									</NavigationMenuContent>
-								</NavigationMenuItem>
-							</NavigationMenuList>
-						))}
-					</NavigationMenu>
-					<Cart />
-				</div>
+				<Cart />
 			</div>
 		</header>
 	);
