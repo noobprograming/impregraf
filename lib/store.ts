@@ -15,7 +15,10 @@ export const useStore = create<Store>((set) => ({
 }));
 
 const refreshCart = async (cart: string): Promise<Cart> => {
-	const storedCart = cart ?? "";
+	const storedCart = cart;
+	if (!storedCart) {
+		return {} as Cart;
+	}
 	const strapiService = new StrapiDataService();
 	const _cart = await strapiService.getCart(storedCart);
 	useStore.getState().updateCart(_cart);

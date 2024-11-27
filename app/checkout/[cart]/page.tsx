@@ -6,54 +6,60 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Badge } from "@/components/ui/badge";
 import CartProductCard from "@/components/ui/cartProductCard";
 import { Label } from "@/components/ui/label";
-import { ProductCard } from "@/components/ui/productCard";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
 import { useStore } from "@/lib/store";
 import React from "react";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
-import { MercadoPagoConfig } from "mercadopago";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { InternalService } from "@/app/api/internal";
 import type { Cart } from "@/app/types/cart";
 import { MP_PUBLIC_KEY } from "@/lib/envs";
+import { PayType } from "@/app/types/checkout";
 
 export default function Checkout({ params }: { params: { cart: string } }) {
 	const { refreshCart, cart } = useStore();
 	const [total, setTotal] = React.useState(0);
 	const [totalProducts, setTotalProducts] = React.useState(0);
-	const [preferenceId, setPreferenceId] = React.useState("");
-	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-	React.useEffect(() => {
-		refreshCart(params.cart);
-	}, []);
+	const [totalPreferenceId, setTotalPreferenceId] = React.useState("");
+	const [senaPreferenceId, setSenaPreferenceId] = React.useState("");
+	const internalSrv = new InternalService();
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	React.useEffect(() => {
+		refreshCart(params.cart);
+		initMercadoPago(MP_PUBLIC_KEY);
+	}, []);
+
+	React.useEffect(() => {
 		if (cart.cart_products?.length > 0) {
-			const _total = cart.cart_products?.reduce(
+			const cartProducts = cart.cart_products;
+			const _total = cartProducts?.reduce(
 				(acc, product) => acc + product.product.price * product.quantity,
-				total,
+				0,
 			);
 			setTotal(_total);
-			const _totalProducts = cart.cart_products?.reduce(
+			const _totalProducts = cartProducts?.reduce(
 				(acc, product) => acc + product.quantity,
 				0,
 			);
 			setTotalProducts(_totalProducts);
-			fetchMp(cart);
+			fetchTotalPreference();
 		}
-		initMercadoPago(MP_PUBLIC_KEY);
 	}, [cart]);
 
-	const fetchMp = async (cart: Cart) => {
-		const internalSrv = new InternalService();
-		const res = await internalSrv.createMpPreference(cart);
-		setPreferenceId(res.id);
+	const fetchTotalPreference = async () => {
+		const total = await internalSrv.createMpPreference(cart, PayType.Total);
+		setTotalPreferenceId(total.id);
+		setSenaPreferenceId("");
+	};
+
+	const fetchSenaPreference = async () => {
+		console.log("🚀 ~ fetchSenaPreference ~ cart:", cart);
+		const sena = await internalSrv.createMpPreference(cart, PayType.Sena);
+		setSenaPreferenceId(sena.id);
+		setTotalPreferenceId("");
 	};
 
 	return (
@@ -98,12 +104,34 @@ export default function Checkout({ params }: { params: { cart: string } }) {
 			<div>
 				<p className="text-xl font-bold">Total: ${total}</p>
 			</div>
-			{preferenceId && (
-				<Wallet
-					initialization={{ preferenceId }}
-					customization={{ texts: { valueProp: "smart_option" } }}
-				/>
-			)}
+			<Accordion type="single" collapsible defaultValue="item-1">
+				<AccordionItem value="item-1">
+					<AccordionTrigger onClick={() => fetchTotalPreference()}>
+						<p className="text-xl font-bold">Pagar total: ${total}</p>
+					</AccordionTrigger>
+					<AccordionContent className="grid gap-4">
+						{totalPreferenceId && (
+							<Wallet
+								initialization={{ preferenceId: totalPreferenceId }}
+								customization={{ texts: { valueProp: "smart_option" } }}
+							/>
+						)}
+					</AccordionContent>
+				</AccordionItem>
+				<AccordionItem value="item-2">
+					<AccordionTrigger onClick={() => fetchSenaPreference()}>
+						<p className="text-xl font-bold">Pagar seña: ${total * 0.5}</p>
+					</AccordionTrigger>
+					<AccordionContent className="grid gap-4">
+						{senaPreferenceId && (
+							<Wallet
+								initialization={{ preferenceId: senaPreferenceId }}
+								customization={{ texts: { valueProp: "smart_option" } }}
+							/>
+						)}
+					</AccordionContent>
+				</AccordionItem>
+			</Accordion>
 		</div>
 	);
 }

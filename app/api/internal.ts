@@ -1,3 +1,4 @@
+import type { PayType } from "./../types/checkout";
 import { INTERNAL_API_URL } from "@/lib/envs";
 import type { ProductPage } from "../types/product";
 import type { Home } from "../types/home";
@@ -62,7 +63,11 @@ export class InternalService extends InternalFetch {
 		return productPage;
 	}
 
-	async createMpPreference(body: Cart) {
-		return await this.Post("/mercadopago", body);
+	async createMpPreference(body: Cart, type: PayType) {
+		const _body = {
+			cart: body,
+			type,
+		};
+		return await this.Post("/mercadopago", _body);
 	}
 }
