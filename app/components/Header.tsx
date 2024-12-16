@@ -32,7 +32,7 @@ export async function Header() {
 					width={500}
 				/>
 				<div className="flex items-center gap-4">
-					<Link href="/api/auth/login">Login</Link>
+					<a href="/api/auth/login">Login</a>
 					<Separator orientation="vertical" />
 					<Cart />
 				</div>
