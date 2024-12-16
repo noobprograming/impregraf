@@ -9,10 +9,15 @@ class InternalFetch {
 	private url = INTERNAL_API_URL;
 
 	async Get(url: string) {
-		console.log("🚀 ~ InternalFetch ~ Get ~ this.url + url:", this.url + url);
 		try {
+			console.log("🚀 ~ InternalFetch ~ Get ~ this.url + url:", this.url + url);
 			const response = await fetch(this.url + url);
-			return await response.json();
+			console.log("🚀 ~ InternalFetch ~ Get ~ response:", response);
+			if (response.headers.get("Content-Type")?.includes("application/json")) {
+				return await response.json();
+			}
+
+			return await response.text();
 		} catch (error) {
 			console.log("🚀 ~ InternalFetch ~ Get ~ error:", error);
 			return {};
@@ -69,5 +74,10 @@ export class InternalService extends InternalFetch {
 			type,
 		};
 		return await this.Post("/mercadopago", _body);
+	}
+
+	async getSession() {
+		const session = await this.Get("/auth/login");
+		return session;
 	}
 }

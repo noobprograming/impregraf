@@ -1,7 +1,6 @@
 import type { Cart } from "@/app/types/cart";
 import { create } from "zustand";
 import { StrapiDataService } from "@/app/api/strapi";
-
 interface Store {
 	cart: Cart;
 	updateCart: (cart: Cart) => void;

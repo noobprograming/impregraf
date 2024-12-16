@@ -15,6 +15,8 @@ import Image from "next/image";
 import Icon from "@/components/ui/icon";
 import Cart from "./Header/Cart";
 import { STRAPI_URL } from "@/lib/envs";
+import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
 
 export async function Header() {
 	const menu: Menu = await new InternalService().getMenu();
@@ -29,7 +31,11 @@ export async function Header() {
 					height={300}
 					width={500}
 				/>
-				<Cart />
+				<div className="flex items-center gap-4">
+					<Link href="/login">Login</Link>
+					<Separator orientation="vertical" />
+					<Cart />
+				</div>
 			</div>
 		</header>
 	);

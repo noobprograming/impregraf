@@ -1,3 +1,4 @@
+import { Lumiflex } from "uvcanvas";
 import Categories from "./components/Categories";
 import HomeHero from "./components/Hero/Hero";
 import Mvp from "./components/Mvp";
@@ -10,6 +11,7 @@ export default async function Home() {
 	return (
 		<div className="py-8 grid gap-14">
 			{home.hero && <HomeHero hero={home.hero} />}
+
 			{home.products && <Mvp products={home.products} />}
 			{home.categories && <Categories categories={home.categories} />}
 		</div>

@@ -1,7 +1,20 @@
 import { STRAPI_API_TOKEN, STRAPI_URL } from "@/lib/envs";
-import type { Cart } from "../types/cart";
-import type { Category, Subcategory } from "../types/commons";
+import type { Cart } from "@/app/types/cart";
+import type { Category, Subcategory } from "@/app/types/commons";
+import type {
+	PurchaseOrderStatus,
+	Delivery,
+	AmountType,
+} from "@/app/types/checkout";
 
+interface CreatePurchaseOrderProps {
+	purchaseOrderId: string | null;
+	cart: string;
+	status: PurchaseOrderStatus;
+	delivery: Delivery;
+	address: string;
+	amountType: AmountType;
+}
 interface CartProductPayload {
 	title: string;
 	quantity: number;
@@ -138,7 +151,8 @@ export class StrapiDataService extends StrapiFetch {
 		cartProduct,
 	}: { cart: string; cartProduct: CartProductPayload }) {
 		let cartId = cart;
-		if (!cart) {
+
+		if (!cartId) {
 			const cart = await this.Post("/carts", {});
 			cartId = cart.documentId;
 		}
@@ -165,5 +179,28 @@ export class StrapiDataService extends StrapiFetch {
 
 	async deleteCartProduct(cartProductId: string) {
 		await this.Delete(`/cart-products/${cartProductId}`);
+	}
+
+	async createPurchaseOrder({
+		purchaseOrderId,
+		cart,
+		status,
+		delivery,
+		address,
+		amountType,
+	}: CreatePurchaseOrderProps) {
+		const body = {
+			cart: { set: [{ documentId: cart }] },
+			status,
+			delivery,
+			address,
+			amountType,
+		};
+
+		if (purchaseOrderId) {
+			return await this.Put(`/purchase-orders/${purchaseOrderId}`, body);
+		}
+
+		return await this.Post("/purchase-orders", body);
 	}
 }

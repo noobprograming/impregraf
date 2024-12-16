@@ -53,6 +53,13 @@ export default function CartProductCard({
 							<Icon icon={IconType.Trash} size={16} color="red" />
 						</div>
 					)}
+					{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
+					<div
+						className="cursor-pointer sm:hidden"
+						onClick={() => removeCartProduct(cartProduct)}
+					>
+						<Icon icon={IconType.Trash} size={16} color="red" />
+					</div>
 				</div>
 				<div className="flex gap-2">
 					<Badge variant="secondary">{cartProduct.size?.name}</Badge>

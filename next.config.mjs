@@ -15,6 +15,12 @@ const nextConfig = {
 		// your project has ESLint errors.
 		ignoreDuringBuilds: true,
 	},
+    experimental: {
+        httpProtocol: "https"
+    },
+    server: {
+        https: true
+    }
 };
 
 export default nextConfig;
