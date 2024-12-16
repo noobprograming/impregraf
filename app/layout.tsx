@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "./components/Header";
 import { Toaster } from "@/components/ui/sonner";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",
@@ -28,6 +29,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
+			<SpeedInsights />
 			<UserProvider>
 				<body
 					className={`${geistSans.variable} ${geistMono.variable} antialiased px-4
